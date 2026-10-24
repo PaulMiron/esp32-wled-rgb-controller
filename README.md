@@ -2,7 +2,11 @@
 
 A simple controller board for **12V analog RGB LED strips** (non-addressable, common anode), built around an **ESP32 DevKitC** running **[WLED](https://kno.wled.ge/)**. It supports Wi-Fi control from the WLED app/web UI and an **IR remote** via an onboard IR receiver header.
 
-![Board](images/board_top.jpg)
+| Assembled board | Schematic | PCB render |
+|---|---|---|
+| ![Assembled board](images/IMG_1753.jpeg) | ![Schematic](images/1792836429831_image.png) | ![3D render](images/1792836470510_image.png) |
+
+![PCB layout](images/1792836447671_image.png)
 
 ## Features
 
@@ -23,10 +27,14 @@ A simple controller board for **12V analog RGB LED strips** (non-addressable, co
 | R2, R4, R6 | 10 kΩ | Gate pull-downs (LEDs stay off during boot) |
 | J1 | DC barrel jack | 12V input |
 | J2 | 4-pin screw terminal | Connection to LM2596 module (IN+, IN−, OUT+, OUT−) |
-| RGB1 | 4-pin header | +12V, G, R, B to the LED strip |
-| IRRECEIVER1 | 3-pin header | VCC (3.3V), GND, OUT |
+| RGB1 | 4 solder-wire pads | +12V, G, R, B to the LED strip |
+| IRRECEIVER1 | 3 solder-wire pads | VCC (3.3V), GND, OUT |
 | — | LM2596 buck module | **Set output to 5V before connecting the ESP32!** |
 | — | IR receiver module | e.g. VS1838B / KY-022 |
+
+Full bill of materials: [`docs/proiectv2.csv`](docs/proiectv2.csv).
+
+> The ESP32 footprint comes from the **Espressif KiCad library** (`PCM_Espressif`). Install it from KiCad's Plugin and Content Manager before opening the PCB.
 
 ## Pinout
 
@@ -75,13 +83,20 @@ A simple controller board for **12V analog RGB LED strips** (non-addressable, co
 ## Repository Structure
 
 ```
-├── hardware/        KiCad project (schematic, PCB, libraries)
-├── gerbers/         Fabrication files
-├── images/          Photos and renders
-├── docs/            Schematic PDF, BOM
+├── hardware/
+│   ├── proiectv2.kicad_pro      KiCad project
+│   ├── proiectv2.kicad_sch      Schematic
+│   └── proiectv2.kicad_pcb      PCB layout
+├── gerbers/                     Gerber + drill files, ready for fabrication
+├── docs/
+│   └── proiectv2.csv            Bill of materials
+├── images/                      Photos, schematic, PCB layout and 3D render
+├── LICENSE
 └── README.md
 ```
 
+To order the board, zip the contents of `gerbers/` and upload the archive to any PCB manufacturer (JLCPCB, PCBWay, etc.). 2-layer, 1.6 mm, standard settings.
+
 ## License
 
-Hardware released under [CERN-OHL-P v2](https://ohwr.org/cern_ohl_p_v2.txt). Feel free to use and modify.
+This project is licensed under the **GNU General Public License v2.0**. See [LICENSE](LICENSE) for details.
